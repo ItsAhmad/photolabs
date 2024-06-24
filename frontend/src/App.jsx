@@ -1,10 +1,20 @@
-import React from 'react';
-
+import React, { useState, useCallback } from 'react';
 import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
-import photos from './mocks/photos'
+import photos from './mocks/photos';
 
 const App = () => {
+  const [likedPhotos, setLikedPhotos] = useState({});
+
+  const isLiked = useCallback((photoId) => !!likedPhotos[photoId], [likedPhotos]);
+
+  const toggleLike = useCallback((photoId) => {
+    setLikedPhotos((prev) => ({
+      ...prev,
+      [photoId]: !prev[photoId],
+    }));
+  }, []);
+
   const displayedPhotos = Array.from({ length: 3 }, (_, index) => photos[index]);
 
   return (
@@ -12,11 +22,9 @@ const App = () => {
       {displayedPhotos.map((photo) => (
         <PhotoListItem
           key={photo.id}
-          photoId={photo.id}
-          location={photo.location}
-          imageSource={photo.urls.regular}
-          username={photo.user.username}
-          profile={photo.user.profile}
+          photo={photo}
+          isLiked={isLiked}
+          toggleLike={toggleLike}
         />
       ))}
     </div>
