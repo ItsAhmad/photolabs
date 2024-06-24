@@ -1,21 +1,19 @@
-import React from "react";
-import PhotoFavButton from "./PhotoFavButton";
-import "../styles/PhotoListItem.scss";
+import React from 'react';
+import PhotoFavButton from './PhotoFavButton';
+import '../styles/PhotoListItem.scss';
 
-const PhotoListItem = ({ isLiked, toggleLike, photoId, photo }) => {
-  const { urls, user, location } = photo;
-
+const PhotoListItem = ({ isLiked, toggleLike, photo }) => {
   return (
-    <div className={`photo-list__item`}>
-      <PhotoFavButton isLiked={isLiked} toggleLike={toggleLike} photoId={photoId}></PhotoFavButton>
-      <img className="photo-list__image" src={urls.regular} alt={`Image taken in ${location.city}, ${location.country}`}></img>
+    <div className="photo-list__item">
+      <div className="photo-container" style={{ position: 'relative' }}>
+        <img src={photo.urls.regular} alt={`${photo.user.username}'s photo`} />
+        <PhotoFavButton photoId={photo.id} isLiked={isLiked} toggleLike={toggleLike} />
+      </div>
       <div className="photo-list__user-details">
-        <img className="photo-list__user-profile" src={user.profile} alt={`Profile for ${user.username}`}></img>
+        <img src={photo.user.profile} alt={`${photo.user.username}'s profile`} className="photo-list__user-profile" />
         <div className="photo-list__user-info">
-          <span>{user.name}</span>
-          <div className="photo-list__user-location">
-            {location.city}, {location.country}
-          </div>
+          <span>{photo.user.username}</span>
+          <span>{photo.location.city}, {photo.location.country}</span>
         </div>
       </div>
     </div>

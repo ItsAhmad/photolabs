@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import PhotoListItem from './components/PhotoListItem';
+import PhotoList from './components/PhotoList';
 import './App.scss';
 import photos from './mocks/photos';
 
@@ -19,14 +19,11 @@ const App = () => {
 
   return (
     <div className="App">
-      {displayedPhotos.map((photo) => (
-        <PhotoListItem
-          key={photo.id}
-          photo={photo}
-          isLiked={isLiked}
-          toggleLike={toggleLike}
-        />
-      ))}
+      <PhotoList 
+        photos={displayedPhotos} 
+        isLiked={isLiked} 
+        toggleLike={toggleLike} 
+      />
     </div>
   );
 };
