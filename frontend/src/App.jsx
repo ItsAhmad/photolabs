@@ -22,7 +22,7 @@ const App = () => {
     }));
   }, []);
 
-  const displayedPhotos = Array.from({ length: 3 }, (_, index) => photos[index]);
+  const displayedPhotos = Array.from({ length: 10 }, (_, index) => photos[index]);
 
   return (
     <div className="App">
