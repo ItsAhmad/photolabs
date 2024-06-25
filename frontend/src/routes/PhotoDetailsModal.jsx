@@ -1,16 +1,23 @@
 import React from 'react';
+import PhotoFavButton from 'components/PhotoFavButton';
+import PhotoList from 'components/PhotoList';
+import '../styles/PhotoDetailsModal.scss';
+import '../styles/PhotoListItem.scss';
 
-import '../styles/PhotoDetailsModal.scss'
-import closeSymbol from '../assets/closeSymbol.svg';
 
-const PhotoDetailsModal = () => {
+const PhotoDetailsModal = ({ photo, closeModal }) => {
+  if (!photo) return null;
+
   return (
-    <div className="photo-details-modal">
-      <button className="photo-details-modal__close-button">
-        <img src={closeSymbol} alt="close symbol" />
-      </button>
+    <div className="modal">
+      <div className="modal-content">
+        <span className="close-button" onClick={closeModal}>&times;</span>
+        <img src={photo.urls.regular} alt={photo.description} />
+        <h2>{photo.user.name}</h2>
+        <p>{photo.description}</p>
+      </div>
     </div>
-  )
+  );
 };
 
 export default PhotoDetailsModal;

@@ -2,18 +2,14 @@ import React from 'react';
 import PhotoFavButton from './PhotoFavButton';
 import '../styles/PhotoListItem.scss';
 
-const PhotoListItem = ({ isLiked, toggleLike, photo }) => {
+const PhotoListItem = ({ photo, isLiked, toggleLike, openModal }) => {
   return (
     <div className="photo-list__item">
-      <div className="photo-container" style={{ position: 'relative' }}>
-        <img src={photo.urls.regular} alt={`${photo.user.username}'s photo`} />
-        <PhotoFavButton photoId={photo.id} isLiked={isLiked} toggleLike={toggleLike} />
-      </div>
-      <div className="photo-list__user-details">
-        <img src={photo.user.profile} alt={`${photo.user.username}'s profile`} className="photo-list__user-profile" />
+      <PhotoFavButton isLiked={isLiked} toggleLike={toggleLike} photoId={photo.id} />
+      <div className="photo-list__details" onClick={() => openModal(photo)}>
+        <img src={photo.urls.regular} alt={photo.description} />
         <div className="photo-list__user-info">
-          <span>{photo.user.username}</span>
-          <span>{photo.location.city}, {photo.location.country}</span>
+          <span>{photo.user.name}</span>
         </div>
       </div>
     </div>
@@ -21,3 +17,4 @@ const PhotoListItem = ({ isLiked, toggleLike, photo }) => {
 };
 
 export default PhotoListItem;
+

@@ -5,9 +5,12 @@ import './App.scss';
 import photos from './mocks/photos';
 import topics from './mocks/topics'
 import TopNavigationBar from 'components/TopNavigationBar';
+import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 
 const App = () => {
-  const [likedPhotos, setLikedPhotos, topicData] = useState({});
+  const [likedPhotos, setLikedPhotos] = useState({});
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [ topicData, modal] = useState({});
 
   const getPhotosByTopic = (topicId) => {
   
@@ -24,6 +27,15 @@ const App = () => {
 
   const displayedPhotos = Array.from({ length: 10 }, (_, index) => photos[index]);
 
+  const openModal = (photo) => {
+    setSelectedPhoto(photo);
+  };
+
+  const closeModal = () => {
+    setSelectedPhoto(null);
+  };
+
+
   return (
     <div className="App">
       <TopNavigationBar />
@@ -33,7 +45,14 @@ const App = () => {
         isLiked={isLiked} 
         toggleLike={toggleLike} 
         topics={topicData}
+        openModal={openModal}
       />
+        {selectedPhoto && (
+        <PhotoDetailsModal
+          photo={selectedPhoto}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };

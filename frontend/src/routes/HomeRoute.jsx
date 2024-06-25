@@ -4,10 +4,10 @@ import PhotoList from 'components/PhotoList';
 import '../styles/HomeRoute.scss';
 
 
-const HomeRoute = ({ getAllPhotos, FavPhotoExist, isLiked, toggleLike, photos, topics, getPhotosByTopic }) => {
+const HomeRoute = ({ getAllPhotos, isFavPhotoExist, isLiked, toggleLike, photos, topics, getPhotosByTopic }) => {
   return (
     <div className="home-route">
-      <TopNavigationBar getAllPhotos={getAllPhotos} FavPhotoExist={FavPhotoExist} topics={topics} getPhotosByTopic={getPhotosByTopic}/>
+      <TopNavigationBar getAllPhotos={getAllPhotos} isFavPhotoExist={isFavPhotoExist} topics={topics} getPhotosByTopic={getPhotosByTopic}/>
       <PhotoList isLiked={isLiked} toggleLike={toggleLike} photos={photos}/>
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
-const PhotoList = ({ photos, isLiked, toggleLike }) => {
+const PhotoList = ({ photos, isLiked, toggleLike, openModal }) => {
   return (
     <div className="photo-list">
       {photos.map((photo) => (
@@ -11,6 +11,7 @@ const PhotoList = ({ photos, isLiked, toggleLike }) => {
           photo={photo}
           isLiked={isLiked}
           toggleLike={toggleLike}
+          openModal={openModal}
         />
       ))}
     </div>
