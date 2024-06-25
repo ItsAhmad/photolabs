@@ -1,10 +1,17 @@
 import React, { useState, useCallback } from 'react';
 import PhotoList from './components/PhotoList';
+import TopicList from './components/TopicList';
 import './App.scss';
 import photos from './mocks/photos';
+import topics from './mocks/topics'
+import TopNavigationBar from 'components/TopNavigationBar';
 
 const App = () => {
   const [likedPhotos, setLikedPhotos, topicData] = useState({});
+
+  const getPhotosByTopic = (topicId) => {
+  
+  };
 
   const isLiked = useCallback((photoId) => !!likedPhotos[photoId], [likedPhotos]);
 
@@ -19,6 +26,8 @@ const App = () => {
 
   return (
     <div className="App">
+      <TopNavigationBar />
+      <TopicList topics={topics} getPhotosByTopic={getPhotosByTopic} />
       <PhotoList 
         photos={displayedPhotos} 
         isLiked={isLiked} 
