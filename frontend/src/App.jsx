@@ -4,7 +4,7 @@ import './App.scss';
 import photos from './mocks/photos';
 
 const App = () => {
-  const [likedPhotos, setLikedPhotos] = useState({});
+  const [likedPhotos, setLikedPhotos, topicData] = useState({});
 
   const isLiked = useCallback((photoId) => !!likedPhotos[photoId], [likedPhotos]);
 
@@ -23,6 +23,7 @@ const App = () => {
         photos={displayedPhotos} 
         isLiked={isLiked} 
         toggleLike={toggleLike} 
+        topics={topicData}
       />
     </div>
   );
