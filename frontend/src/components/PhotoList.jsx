@@ -3,6 +3,10 @@ import '../styles/PhotoList.scss';
 import PhotoFavButton from './PhotoFavButton';
 
 const PhotoListItem = ({ photo, isLiked, toggleLike, openModal }) => {
+  if (!photo || !photo.urls || !photo.user) {
+    return null;
+  }
+
   return (
     <div className="photo-list__item" onClick={() => openModal(photo)}>
       <img src={photo.urls.regular} alt={photo.location} />

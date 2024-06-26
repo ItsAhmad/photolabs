@@ -11,6 +11,7 @@ const App = () => {
   const [similarPhotos, setSimilarPhotos] = useState([]);
 
   const getPhotosByTopic = (topicId) => {
+
   };
 
   const isLiked = useCallback((photoId) => !!likedPhotos[photoId], [likedPhotos]);
@@ -33,7 +34,7 @@ const App = () => {
     setSimilarPhotos([]);
   };
 
-  const displayedPhotos = Array.from({ length: 10 }, (_, index) => photos[index]);
+  const displayedPhotos = photos.slice(0, 10);
 
   return (
     <div className="App">
@@ -50,6 +51,8 @@ const App = () => {
           photo={selectedPhoto}
           similarPhotos={similarPhotos}
           closeModal={closeModal}
+          isLiked={isLiked}
+          toggleLike={toggleLike}
         />
       )}
     </div>

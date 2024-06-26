@@ -5,7 +5,7 @@ import '../styles/PhotoDetailsModal.scss';
 import '../styles/PhotoListItem.scss';
 
 
-const PhotoDetailsModal = ({ photo, similarPhotos, closeModal }) => {
+const PhotoDetailsModal = ({ photo, similarPhotos, closeModal, isLiked, toggleLike }) => {
   if (!photo) return null;
 
   return (
@@ -16,6 +16,7 @@ const PhotoDetailsModal = ({ photo, similarPhotos, closeModal }) => {
         <div className="modal-details">
           <h2>{photo.user.username}</h2>
           <p>{photo.location}</p>
+          <PhotoFavButton photoId={photo.id} isLiked={isLiked} toggleLike={toggleLike} />
         </div>
         <div className="similar-photos">
           <h3>Similar Photos</h3>
