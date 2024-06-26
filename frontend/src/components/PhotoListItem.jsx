@@ -5,11 +5,12 @@ import '../styles/PhotoListItem.scss';
 const PhotoListItem = ({ photo, isLiked, toggleLike, openModal }) => {
   return (
     <div className="photo-list__item">
-      <PhotoFavButton isLiked={isLiked} toggleLike={toggleLike} photoId={photo.id} />
-      <div className="photo-list__details" onClick={() => openModal(photo)}>
-        <img src={photo.urls.regular} alt={photo.description} />
+      <img src={photo.urls.regular} alt={photo.location} onClick={() => openModal(photo)} />
+      <PhotoFavButton photoId={photo.id} isLiked={isLiked} toggleLike={toggleLike} />
+      <div className="photo-list__user-details">
+        <img src={photo.user.profile} alt={photo.user.username} className="photo-list__user-profile" />
         <div className="photo-list__user-info">
-          <span>{photo.user.name}</span>
+          <span>{photo.user.username}</span>
         </div>
       </div>
     </div>

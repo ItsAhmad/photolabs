@@ -47,10 +47,11 @@ const App = () => {
         topics={topicData}
         openModal={openModal}
       />
-        {selectedPhoto && (
+         {selectedPhoto && (
         <PhotoDetailsModal
+          showModal={!!selectedPhoto}
           photo={selectedPhoto}
-          closeModal={closeModal}
+          onClose={() => setSelectedPhoto(null)}
         />
       )}
     </div>
