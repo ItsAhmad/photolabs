@@ -4,11 +4,11 @@ import PhotoList from 'components/PhotoList';
 import '../styles/HomeRoute.scss';
 
 
-const HomeRoute = ({ getAllPhotos, isFavPhotoExist, isLiked, toggleLike, photos, topics, getPhotosByTopic, openModal}) => {
+const HomeRoute = ({ getAllPhotos, isFavPhotoExist, isLiked, toggleLike, photos, topics, getPhotosByTopic, openModal }) => {
   return (
     <div className="home-route">
-      <TopNavigationBar getAllPhotos={getAllPhotos} isFavPhotoExist={isFavPhotoExist} topics={topics} getPhotosByTopic={getPhotosByTopic}/>
-      <PhotoList isLiked={isLiked} toggleLike={toggleLike} photos={photos} openModal={openModal}/>
+      <TopNavigationBar getAllPhotos={getAllPhotos} isFavPhotoExist={isFavPhotoExist} topics={topics} getPhotosByTopic={getPhotosByTopic} />
+      <PhotoList isLiked={isLiked} toggleLike={toggleLike} photos={photos} openModal={openModal} />
     </div>
   );
 };

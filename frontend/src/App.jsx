@@ -1,19 +1,16 @@
 import React, { useState, useCallback } from 'react';
-import PhotoList from './components/PhotoList';
-import TopicList from './components/TopicList';
+import HomeRoute from './routes/HomeRoute';
+import PhotoDetailsModal from './routes/PhotoDetailsModal';
 import './App.scss';
 import photos from './mocks/photos';
-import topics from './mocks/topics'
-import TopNavigationBar from 'components/TopNavigationBar';
-import PhotoDetailsModal from 'routes/PhotoDetailsModal';
+import topics from './mocks/topics';
 
 const App = () => {
   const [likedPhotos, setLikedPhotos] = useState({});
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [ topicData, modal] = useState({});
+  const [similarPhotos, setSimilarPhotos] = useState([]);
 
   const getPhotosByTopic = (topicId) => {
-  
   };
 
   const isLiked = useCallback((photoId) => !!likedPhotos[photoId], [likedPhotos]);
@@ -25,33 +22,34 @@ const App = () => {
     }));
   }, []);
 
-  const displayedPhotos = Array.from({ length: 10 }, (_, index) => photos[index]);
-
   const openModal = (photo) => {
     setSelectedPhoto(photo);
+    const similarPhotosMock = photos.filter(p => p.id !== photo.id).slice(0, 5);
+    setSimilarPhotos(similarPhotosMock);
   };
 
   const closeModal = () => {
     setSelectedPhoto(null);
+    setSimilarPhotos([]);
   };
 
+  const displayedPhotos = Array.from({ length: 10 }, (_, index) => photos[index]);
 
   return (
     <div className="App">
-      <TopNavigationBar />
-      <TopicList topics={topics} getPhotosByTopic={getPhotosByTopic} />
-      <PhotoList 
-        photos={displayedPhotos} 
-        isLiked={isLiked} 
-        toggleLike={toggleLike} 
-        topics={topicData}
+      <HomeRoute 
+        getPhotosByTopic={getPhotosByTopic}
+        isLiked={isLiked}
+        toggleLike={toggleLike}
+        photos={displayedPhotos}
+        topics={topics}
         openModal={openModal}
       />
-         {selectedPhoto && (
+      {selectedPhoto && (
         <PhotoDetailsModal
-          showModal={!!selectedPhoto}
           photo={selectedPhoto}
-          onClose={() => setSelectedPhoto(null)}
+          similarPhotos={similarPhotos}
+          closeModal={closeModal}
         />
       )}
     </div>

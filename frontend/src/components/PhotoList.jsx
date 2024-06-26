@@ -1,21 +1,20 @@
 import React from 'react';
-import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
+import PhotoFavButton from './PhotoFavButton';
 
-const PhotoList = ({ photos, isLiked, toggleLike, openModal }) => {
+const PhotoListItem = ({ photo, isLiked, toggleLike, openModal }) => {
   return (
-    <div className="photo-list">
-      {photos.map((photo) => (
-        <PhotoListItem
-          key={photo.id}
-          photo={photo}
-          isLiked={isLiked}
-          toggleLike={toggleLike}
-          openModal={openModal}
-        />
-      ))}
+    <div className="photo-list__item" onClick={() => openModal(photo)}>
+      <img src={photo.urls.regular} alt={photo.location} />
+      <PhotoFavButton photoId={photo.id} isLiked={isLiked} toggleLike={toggleLike} />
+      <div className="photo-list__user-details">
+        <img src={photo.user.profile} alt={photo.user.username} className="photo-list__user-profile" />
+        <div className="photo-list__user-info">
+          <span>{photo.user.username}</span>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default PhotoList;
+export default PhotoListItem;
