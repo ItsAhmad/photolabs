@@ -1,60 +1,44 @@
-import React, { useState, useCallback } from 'react';
-import HomeRoute from './routes/HomeRoute';
-import PhotoDetailsModal from './routes/PhotoDetailsModal';
+import React from 'react';
 import './App.scss';
-import photos from './mocks/photos';
-import topics from './mocks/topics';
+import HomeRoute from 'routes/HomeRoute';
+import PhotoDetailsModal from 'routes/PhotoDetailsModal';
+import { useApplicationData } from 'hooks/useApplicationData';
 
 const App = () => {
-  const [likedPhotos, setLikedPhotos] = useState({});
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [similarPhotos, setSimilarPhotos] = useState([]);
+  const {
+    state: { likes, selectedPhoto, modal, photoData, topicData },
+    updateToFavPhotoIds,
+    setPhotoSelected,
+    getPhotosByTopic,
+    getAllPhotos,
+    onClosePhotoDetailsModal,
+  } = useApplicationData();
 
-  const getPhotosByTopic = (topicId) => {
-
-  };
-
-  const isLiked = useCallback((photoId) => !!likedPhotos[photoId], [likedPhotos]);
-
-  const toggleLike = useCallback((photoId) => {
-    setLikedPhotos((prev) => ({
-      ...prev,
-      [photoId]: !prev[photoId],
-    }));
-  }, []);
-
-  const openModal = (photo) => {
-    setSelectedPhoto(photo);
-    const similarPhotosMock = photos.filter(p => p.id !== photo.id).slice(0, 5);
-    setSimilarPhotos(similarPhotosMock);
-  };
-
-  const closeModal = () => {
-    setSelectedPhoto(null);
-    setSimilarPhotos([]);
-  };
-
-  const displayedPhotos = photos.slice(0, 10);
+  
+  const isLiked = photoId => likes.includes(photoId);
+ 
+  const isFavPhotoExist = likes.length > 0;
 
   return (
-    <div className="App">
-      <HomeRoute 
-        getPhotosByTopic={getPhotosByTopic}
+    <div className={`App`}>
+      <HomeRoute
+        isFavPhotoExist={isFavPhotoExist}
         isLiked={isLiked}
-        toggleLike={toggleLike}
-        photos={displayedPhotos}
-        topics={topics}
-        openModal={openModal}
+        toggleLike={updateToFavPhotoIds}
+        photos={photoData}
+        topics={topicData}
+        getPhotosByTopic={getPhotosByTopic}
+        getAllPhotos={getAllPhotos}
+        showModal={setPhotoSelected}
       />
-      {selectedPhoto && (
+      {modal &&
         <PhotoDetailsModal
-          photo={selectedPhoto}
-          similarPhotos={similarPhotos}
-          closeModal={closeModal}
+          showModal={setPhotoSelected}
+          hideModal={onClosePhotoDetailsModal}
+          selectedPhoto={selectedPhoto}
           isLiked={isLiked}
-          toggleLike={toggleLike}
-        />
-      )}
+          toggleLike={updateToFavPhotoIds}
+        />}
     </div>
   );
 };
