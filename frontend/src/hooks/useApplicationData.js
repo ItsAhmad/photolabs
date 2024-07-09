@@ -48,6 +48,7 @@ const reducer = (state, action) => {
   }
 };
 
+
 export const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
@@ -59,22 +60,25 @@ export const useApplicationData = () => {
 
   const onClosePhotoDetailsModal = () => dispatch({ type: ACTIONS.CLOSE_PHOTO });
 
-
+  
   const getAllPhotos = () => {
     fetch(`/api/photos`)
       .then(res => res.json())
       .then(photoData => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData }));
   };
 
+  
   useEffect(() => {
     getAllPhotos();
   }, []);
+
 
   useEffect(() => {
     fetch(`/api/topics`)
       .then(res => res.json())
       .then(topicData => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData }));
   }, []);
+
 
   useEffect(() => {
     if (state.selectedTopic) {
@@ -90,6 +94,6 @@ export const useApplicationData = () => {
     setPhotoSelected,
     getPhotosByTopic,
     getAllPhotos,
-    onClosePhotoDetailsModal
+    onClosePhotoDetailsModal,
   };
 };

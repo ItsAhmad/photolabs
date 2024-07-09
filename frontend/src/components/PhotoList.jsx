@@ -1,24 +1,24 @@
-import React from 'react';
-import '../styles/PhotoList.scss';
-import PhotoFavButton from './PhotoFavButton';
+import React from "react";
+import PhotoListItem from "./PhotoListItem";
+import "../styles/PhotoList.scss";
 
-const PhotoListItem = ({ photo, isLiked, toggleLike, openModal }) => {
-  if (!photo || !photo.urls || !photo.user) {
-    return null;
-  }
+const PhotoList = ({ isLiked, toggleLike, photos, showModal }) => {
+  // check if photos is an object
+  if (typeof(photos) === 'object') {
+    photos = Object.values(photos);
+  } 
+
+  const photoList = photos.map(photo => {
+    return (
+      <PhotoListItem key={photo.id} isLiked={isLiked} toggleLike={toggleLike} photoId={photo.id} photo={photo} showModal={() => showModal(photo)}/>
+    );
+  });
 
   return (
-    <div className="photo-list__item" onClick={() => openModal(photo)}>
-      <img src={photo.urls.regular} alt={photo.location} />
-      <PhotoFavButton photoId={photo.id} isLiked={isLiked} toggleLike={toggleLike} />
-      <div className="photo-list__user-details">
-        <img src={photo.user.profile} alt={photo.user.username} className="photo-list__user-profile" />
-        <div className="photo-list__user-info">
-          <span>{photo.user.username}</span>
-        </div>
-      </div>
-    </div>
+    <ul className="photo-list">
+      {photoList}
+    </ul>
   );
 };
 
-export default PhotoListItem;
+export default PhotoList;
