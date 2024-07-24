@@ -3,15 +3,28 @@ import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
 const PhotoList = ({ isLiked, toggleLike, photos, showModal }) => {
-  const photoList = photos.map(photo => {
-    return (
-      <PhotoListItem key={photo.id} isLiked={isLiked} toggleLike={toggleLike} photoId={photo.id} photo={photo} showModal={() => showModal(photo)} />
-    );
-  });
+  let photoArray = [];
+
+  if (Array.isArray(photos)) {
+    photoArray = photos;
+  } else if (typeof photos === 'object') {
+    photoArray = Object.values(photos);
+  }
 
   return (
     <ul className="photo-list">
-      {photoList}
+      {photoArray.map((photo) => (
+        <li key={photo.id}>
+          <PhotoListItem
+            key={photo.id} 
+            isLiked={isLiked} 
+            toggleLike={toggleLike} 
+            photoId={photo.id} 
+            photo={photo} 
+            showModal={() => showModal(photo)} 
+          />
+        </li>
+      ))}
     </ul>
   );
 };
