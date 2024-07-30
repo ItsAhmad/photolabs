@@ -1,5 +1,9 @@
 import React from 'react';
 
+/*
+Component for style of Favourite Icon
+*/ 
+
 const FavIcon = ({ displayAlert, selected }) => {
   return (
     <svg 
