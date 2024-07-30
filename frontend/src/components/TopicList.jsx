@@ -2,6 +2,10 @@ import React from "react";
 import TopicListItem from "./TopicListItem";
 import "../styles/TopicList.scss";
 
+/*
+Component to associate photos with their relevant topics
+*/
+
 const TopicList = ({ topics, getPhotosByTopic }) => {
   const topicList = topics.map(topic => {
     return (
