@@ -3,6 +3,10 @@ import TopicList from './TopicList';
 import FavBadge from './FavBadge';
 import '../styles/TopNavigationBar.scss';
 
+/*
+Component for the top nav bar with topics
+*/
+
 const TopNavigationBar = ({ getAllPhotos, topics, getPhotosByTopic, isFavPhotoExist }) => {
   return (
     <div className="top-nav-bar">
