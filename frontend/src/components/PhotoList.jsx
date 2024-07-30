@@ -2,6 +2,10 @@ import React from "react";
 import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
+/*
+Component to retrieve details about multiple photo stored in our database
+*/ 
+
 const PhotoList = ({ isLiked, toggleLike, photos, showModal }) => {
   let photoArray = [];
 
