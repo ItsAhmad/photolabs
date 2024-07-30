@@ -1,5 +1,8 @@
 import { useReducer, useEffect } from 'react';
 
+/* set initial state to blank so data can be loaded in
+*/ 
+
 const INITIAL_STATE = {
   likes: [],
   selectedPhoto: null,
@@ -51,13 +54,13 @@ const reducer = (state, action) => {
 
 export const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-
+//Function to Toggle favourite status of Photo
   const updateToFavPhotoIds = photoId => dispatch({ type: ACTIONS.TOGGLE_LIKE, payload: photoId });
-
+// Function to select specific photo
   const setPhotoSelected = photo => dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
-
+// Function to get photos by certain topic
   const getPhotosByTopic = topicId => dispatch({ type: ACTIONS.SELECT_TOPIC, payload: topicId });
-
+// Function to close photo modal
   const onClosePhotoDetailsModal = () => dispatch({ type: ACTIONS.CLOSE_PHOTO });
 
   
@@ -67,11 +70,13 @@ export const useApplicationData = () => {
       .then(photoData => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData }));
   };
 
-  
+  // Fetch all photos when the component loads 
+
   useEffect(() => {
     getAllPhotos();
   }, []);
 
+//Fetch all topics when component loads
 
   useEffect(() => {
     fetch(`/api/topics`)
@@ -79,6 +84,7 @@ export const useApplicationData = () => {
       .then(topicData => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData }));
   }, []);
 
+//Fetch Photos by selected topic whenver selectedTopic state changes
 
   useEffect(() => {
     if (state.selectedTopic) {
