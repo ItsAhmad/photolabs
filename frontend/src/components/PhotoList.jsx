@@ -7,7 +7,7 @@ Component to retrieve details about multiple photo stored in our database
 */ 
 
 const PhotoList = ({ isLiked, toggleLike, photos, showModal }) => {
-  const photoArray = Object.values(similar_photos); 
+  const photoArray = photos;
 
   /* if (Array.isArray(photos)) {
     photoArray = photos;
